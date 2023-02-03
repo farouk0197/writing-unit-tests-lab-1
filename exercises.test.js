@@ -1,64 +1,58 @@
-const exercises = require('./exercises');
-test('Question 1 isRealPalindrome', () => {
-  expect(exercises.isRealPalindrome('abba')).toEqual(true);
-  expect(exercises.isRealPalindrome('abda')).toEqual(false);
-  expect(exercises.isRealPalindrome('Abba')).toEqual(true);
-  expect(exercises.isRealPalindrome('abba123')).toEqual(false);
-  expect(exercises.isRealPalindrome('321,abba123')).toEqual(true);
-  expect(exercises.isRealPalindrome('')).toEqual(true);
-})
-test('Question 2 runningTotal', () => {
-  expect(exercises.runningTotal([1,2,3])).toEqual([1,3,6]);
-  expect(exercises.runningTotal([])).toEqual([]);
-  expect(exercises.runningTotal([14, 11, 7, 15, 20])).toEqual([14, 25, 32, 47, 67]);
-  expect(exercises.runningTotal([3])).toEqual([3]); 
-  
-})
-test('Question 3 swap', () => {
-  expect(exercises.swap('123')).toEqual('321');
-  expect(exercises.swap('')).toEqual('');
-  expect(exercises.swap('Abcde')).toEqual('edcbA'); 
-  expect(exercises.swap('a')).toEqual('a');
-  expect(exercises.swap('Hello my name is Anaya')).toEqual('olleH ym eman si ayanA');
-})
-test('Question 4 wordSizes', () => {
-  expect(exercises.wordSizes('123')).toEqual({'3': 1});
-  expect(exercises.wordSizes('')).toEqual({});
-  expect(exercises.wordSizes('Hey diddle diddle, the cat and the fiddle!')).toEqual({ "3": 5, "6": 1, "7": 2 }); 
-  expect(exercises.wordSizes("What's up Ana?")).toEqual({ "2": 1, "4": 1, "6": 1 });
-})
-test('Question 5 union', () => {
-  expect(exercises.union([1,2,3],[1,2,3])).toEqual([1,2,3]);
-  expect(exercises.union([1,2,3],[5,4,3])).toEqual([1,2,3,5,4]);
-  expect(exercises.union([1,2,5],[5,4,3])).toEqual([1,2,5,4,3]);
-  
-})
-test('Question 6 firstRecurring', () => {
-  expect(exercises.firstRecurring('')).toEqual('');
-  expect(exercises.firstRecurring('123')).toEqual('');
-  expect(exercises.firstRecurring('abaa')).toEqual('a');
-  expect(exercises.firstRecurring('abba')).toEqual('b');
-})
-test('Question 7 showMultiplicativeAverage', () => {
-  expect(exercises.showMultiplicativeAverage([3, 5])).toEqual("7.500");
-  expect(exercises.showMultiplicativeAverage([2, 5, 7, 11, 13, 17])).toEqual('28361.667');
-  
-})
-test('Question 8 multiplyList', () => {
-  expect(exercises.multiplyList([3, 5, 7], [9, 10, 11])).toEqual([27, 50, 77]);
-  expect(exercises.multiplyList([5, 10, 15, 20], [1, 2, 3, 4])).toEqual([5, 20, 45, 80]);
-  
-})
-test('Question 9 sequence', () => {
-  expect(exercises.sequence(2)).toEqual([1,2]);
-  expect(exercises.sequence(4)).toEqual([1, 2, 3, 4]);
-  expect(exercises.sequence(0)).toEqual([]);
-  
+const exercises = require('./exercises.js');
+
+test('Question 1 isUpperCase', () => {
+  expect(exercises.isUpperCase('')).toEqual(true);
+  expect(exercises.isUpperCase('123')).toEqual(true);
+  expect(exercises.isUpperCase('abaa')).toEqual(false);
+  expect(exercises.isUpperCase('ABBA')).toEqual(true);
+  expect(exercises.isUpperCase('aABBA')).toEqual(false);
+  expect(exercises.isUpperCase('ABBA!')).toEqual(true);
 })
 
 
+test('Question 2 removeVowels', () => {
+  expect(exercises.removeVowels(['123','aeip'])).toEqual(['123','p']);
+  expect(exercises.removeVowels(['green', 'YELLOW', 'black', 'white'])).toEqual(["grn", "YLLW", "blck", "wht"]);
+  expect(exercises.removeVowels(['ABC', 'AEIOU', 'XYZ'])).toEqual(["BC", "", "XYZ"]);
+  expect(exercises.removeVowels([])).toEqual([]);
+})
 
+test('Question 3 wordCap', () => {
+  expect(exercises.wordCap('four score and seven')).toEqual("Four Score And Seven");
+  expect(exercises.wordCap('the javaScript language')).toEqual("The Javascript Language");
+  expect(exercises.wordCap('this is a "quoted" word')).toEqual('This Is A "quoted" Word');
+})
 
+test('Question 4 swapCase', () => {
+  expect(exercises.swapCase('CamelCase')).toEqual('cAMELcASE');
+  expect(exercises.swapCase('123')).toEqual('123');
+  expect(exercises.swapCase('ab-aa')).toEqual('AB-AA');
+
+})
+
+test('Question 5 staggeredCase', () => {
+  expect(exercises.staggeredCase('I Love Launch School!')).toEqual("I lOvE lAuNcH sChOoL!");
+  expect(exercises.staggeredCase('ALL CAPS')).toEqual("AlL cApS");
+  expect(exercises.staggeredCase('ignore 77 the 444 numbers')).toEqual("IgNoRe 77 ThE 444 nUmBeRs");
+
+})
+
+test('Question 6 wordLengths', () => {
+  expect(exercises.wordLengths('cow sheep chicken')).toEqual( ["cow 3", "sheep 5", "chicken 7"]);
+  expect(exercises.wordLengths('baseball hot dogs and apple pie')).toEqual(["baseball 8", "hot 3", "dogs 4", "and 3", "apple 5", "pie 3"]);
+  expect(exercises.wordLengths("It ain't easy, is it?")).toEqual(["It 2", "ain't 5", "easy, 5", "is 2", "it? 3"]);
+  expect(exercises.wordLengths('Supercalifragilisticexpialidocious')).toEqual(["Supercalifragilisticexpialidocious 34"]);
+  expect(exercises.wordLengths('')).toEqual([]);
+  expect(exercises.wordLengths()).toEqual([]);
+})
+
+test('Question 7 searchWord', () => {
+  let text = "D Smoke is humble. The Inglewood native exudes an aura of maturation, needed for his quick ascension into popular culture as the first winner of Rhythm + Flow, Netflix's hip-hop reality competition centered on the discovery of hip-hop's next star. His signature authenticity shone throughout the 10-episode series and international audiences were drawn to his charisma as he proudly rapped about his lived experiences as a young black man in Inglewood."
+  expect(exercises.searchWord('his', text)).toEqual(4);
+  expect(exercises.searchWord('hip-hop', text)).toEqual(1);
+  expect(exercises.searchWord('flow', text)).toEqual(1);
+  expect(exercises.searchWord('is', text)).toEqual(1);
+})
 
 
 
