@@ -1,126 +1,113 @@
 // Question 1
-const isRealPalindrome = (str) => {
-   let newStr = str.replace(/[^a-z0-9]/gi,"").toLowerCase();
+const isUpperCase = (str) => {
+ 
+   const newStr = str.replace(/[^a-z]/gi,"");
    console.log(newStr)
-   let isPalindromeStr = "";
-   const regx = /[a-z0-9]/g;
-   for (let i = newStr.length-1; i >=0;i--){
-      if (newStr[i].match(regx)){
-        isPalindromeStr += newStr[i];
-    }
-  
-    
-   }
-   
-   return newStr === isPalindromeStr
+  for (let i = 0; i< newStr.length;i++){
+      if (newStr[i] !== newStr[i].toUpperCase()) return false
+  }
+  return true
 };
-
-// console.log(isRealPalindrome('Madam'))
+// console.log(isUpperCase('FOUR SCO1E'))
 // Question 2
-const runningTotal = (arr) => {
-  if (arr.length === 0 || arr.length === 1 ){
-      return arr
+const removeVowels = (arr) => {
+  const result = [];
+  for (let i = 0; i< arr.length;i++){
+    let str = arr[i].replace(/[aeiou]/gi,"");
+    result.push(str);
   }
-  const result = [arr[0]];
-  for (let i = 1; i < arr.length;i++){
-      result.push(arr[i]+ result[i-1])
-  }
-  return result 
+  return result;
 };
-// console.log(runningTotal([]))
+
 // Question 3
-const swap = (str) => {
-  let newStr = str.split(" ")
+const wordCap = (str) => {
+  str = str.split(" ");
   const result = [];
-  for (let i =0; i< newStr.length;i++){
-    let word = newStr[i].split("").reverse().join('')
-    result.push(word)
-  }
-
-  return result.join(" ")
-  
-};
-// console.log(swap('Oh what a wonderful day it is'))
-// Question 4
-const wordSizes = (str) => {
-  const obj = {};
-  if (str === "") return {}
-  str = str.split(' ');
-  
-  for (let i =0; i < str.length; i++){
+  for (let i = 0; i < str.length;i++){
     let word = str[i]
-    if (obj[word.length]){
-      obj[word.length]++
-    }else {
-      obj[word.length] = 1
-    
-  }
-  }
- return obj 
-
-
-};
-
-// console.log(wordSizes('Four score and seven.'))
-// Question 5
-const union = (a,b) => {
-    const arr = a.concat(b);
-    console.log(arr)
-    const result = [];
-    const obj = {};
-    arr.forEach(x => {
-      if (!obj[x]){
-        result.push(x);
-        obj[x] = true
-      }
-      
-    });
-    return result
-};
-// console.log(union([1, 3, 5], [3, 6, 9]))
-// Question 6
-const firstRecurring = (str) => {
-  const obj = {};
-  for (let i =0; i < str.length;i++){
-      if (obj[str[i]]){
-        return str[i];
+    let newStr = "";
+    let upperCase = false;
+    for (j = 0;j < word.length; j++){
+      if (j === 0){
+         newStr += word[j].toUpperCase();
       }else {
-        obj[str[i]] = true;
+         newStr += word[j].toLowerCase()
+         
       }
+    }
+    result.push(newStr)
   }
-  return ""
+  return result.join(' ');
 };
-// console.log(firstRecurring("reuben"))
-// Question 7
-const showMultiplicativeAverage = (nums) => {
-    const length = nums.length;
-    const total =  nums.reduce((a,b)=> a*b) / length;
-    return total.toFixed(3)+""
-};
-// console.log(showMultiplicativeAverage([3, 5]))
-// Quetsion 8
-const multiplyList = (a,b) => {
-  return a.map((x,i)=> x * b[i])
-};
-// console.log(multiplyList([3, 5, 7], [9, 10, 11]))
-// Question 9
-const sequence = (num) => {
-  const result = [];
-  for (let i = 1; i <= num;i++){
-      result.push(i)
+// console.log(wordCap('this is a "quoted" word'))
+// Question 4
+const swapCase = (str) => {
+  let result = "";
+  for(let i =0; i< str.length; i++){
+    if (str[i].match(/[a-z]/g)){
+      result+= str[i].toUpperCase();
+    }else if (str[i].match(/[A-Z]/g)){
+      result+= str[i].toLowerCase();
+    }else {
+      result += str[i]
+    }
   }
   return result 
 };
-console.log(sequence(5))
-// The below code connects this JS file to our test file
+// console.log(swapCase('Tonight on XYZ-TV'))
+// Question 5
+const staggeredCase = (str) => {
+  let upper = true;
+  let result = "";
+  for(let i =0; i < str.length;i++){
+    if (str[i].match(/[A-Z]/gi) && upper){
+      result += str[i].toUpperCase();
+      upper = false;
+    }else if (str[i].match(/[A-Z]/gi) && !upper){
+      result += str[i].toLowerCase();
+      upper = true;
+    }else {
+      result += str[i]
+    }
+  }
+  return result 
+};
+
+// console.log(staggeredCase('I Love Launch School!'));
+
+// Question 6
+const wordLengths = (str) => {
+  if (!str) return [];
+  str = str.split(' ');
+  const result = [];
+  for (let i = 0; i < str.length; i++){
+    result.push(str[i]+" "+str[i].length)
+  }
+  return result;
+};
+console.log(wordLengths("Supercalifragilisticexpialidocious"))
+// Question 7
+let text = 'D Smoke is humble. The Inglewood native exudes an aura of maturation, needed for his quick ascension into popular culture as the first winner of Rhythm + Flow, Netflix’s hip-hop reality competition centered on the discovery of hip-hop’s next star. His signature authenticity shone throughout the 10-episode series and international audiences were drawn to his charisma as he proudly rapped about his lived experiences as a young black man in Inglewood.';
+
+const searchWord = (word,text) => {
+  text = text.split(' ');
+  let count = 0;
+  for (let i=0; i < text.length; i++){
+    let wor = text[i].replace(/[,.!?]/g,"");
+    if (wor.toLowerCase() === word.toLowerCase()) count++;
+  }
+  return count
+};
+
+console.log(searchWord('flow',text))
+
+// The code below ensures that this file can talk to our test file.
 module.exports = {
-  isRealPalindrome,
-  runningTotal,
-  swap,
-  wordSizes,
-  union,
-  firstRecurring,
-  showMultiplicativeAverage,
-  multiplyList,
-  sequence,
+  isUpperCase,
+  removeVowels,
+  wordCap,
+  swapCase,
+  staggeredCase,
+  wordLengths,
+  searchWord,
 };
